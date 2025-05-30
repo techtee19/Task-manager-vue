@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const API_URL = 'http://localhost:3000'
 
@@ -31,7 +31,15 @@ export default {
     }
   },
 
+//   logs out the current user
   logout() {
     localStorage.removeItem('user')
-  },
+  }
+
+
+//   checks if user is authenticated
+  getCurrentUser() {
+    const userJson = localStorage.getItem('user')
+    return userJson ? JSON.parse(userJson) : null
+  }
 }
