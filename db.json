@@ -1,0 +1,124 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Alice",
+      "name": "Alice Smith",
+      "email": "alice@example.com",
+      "password": "password123",
+      "avatar": "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+    {
+      "id": 2,
+      "username": "bob",
+      "name": "Bob Smith",
+      "email": "bob@example.com",
+      "password": "password123",
+      "avatar": "https://randomuser.me/api/portraits/men/32.jpg"
+    },
+    {
+      "id": 3,
+      "username": "admin",
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "avatar": "https://randomuser.me/api/portraits/lego/1.jpg"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Complete project proposal",
+      "description": "Finish drafting the proposal for the new client project",
+      "priority": "high",
+      "completed": false,
+      "createdAt": "2025-05-20T10:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "title": "Schedule team meeting",
+      "description": "Set up a meeting with the development team to discuss sprint goals",
+      "priority": "medium",
+      "completed": true,
+      "createdAt": "2025-05-19T08:45:00.000Z",
+      "completedAt": "2025-05-19T14:20:00.000Z"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "title": "Review code changes",
+      "description": "Review pull requests and provide feedback",
+      "priority": "medium",
+      "completed": false,
+      "createdAt": "2025-05-21T09:15:00.000Z"
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "title": "Update documentation",
+      "description": "Update API documentation with new endpoints",
+      "priority": "low",
+      "completed": false,
+      "createdAt": "2025-05-18T11:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "userId": 2,
+      "title": "Fix login bug",
+      "description": "Address the authentication issue reported by users",
+      "priority": "high",
+      "completed": true,
+      "createdAt": "2025-05-17T14:30:00.000Z",
+      "completedAt": "2025-05-18T10:15:00.000Z"
+    },
+    {
+      "id": 6,
+      "userId": 1,
+      "title": "Prepare for presentation",
+      "description": "Create slides for the client presentation next week",
+      "priority": "high",
+      "completed": false,
+      "createdAt": "2025-05-22T13:00:00.000Z"
+    },
+    {
+      "id": 7,
+      "userId": 3,
+      "title": "Deploy application update",
+      "description": "Push the latest changes to production",
+      "priority": "high",
+      "completed": true,
+      "createdAt": "2025-05-16T09:45:00.000Z",
+      "completedAt": "2025-05-16T16:30:00.000Z"
+    },
+    {
+      "id": 8,
+      "userId": 3,
+      "title": "Conduct security audit",
+      "description": "Review application for security vulnerabilities",
+      "priority": "medium",
+      "completed": false,
+      "createdAt": "2025-05-23T10:00:00.000Z"
+    },
+    {
+      "id": 9,
+      "userId": 2,
+      "title": "Implement dark mode",
+      "description": "Add dark mode support to the application",
+      "priority": "low",
+      "completed": true,
+      "createdAt": "2025-05-15T13:20:00.000Z",
+      "completedAt": "2025-05-20T11:45:00.000Z"
+    },
+    {
+      "id": 10,
+      "userId": 1,
+      "title": "Optimize database queries",
+      "description": "Improve performance of slow database operations",
+      "priority": "medium",
+      "completed": false,
+      "createdAt": "2025-05-24T08:30:00.000Z"
+    }
+  ]
+}
