@@ -10,13 +10,12 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
-    async login(username, password) {
+    async login(usernameOrEmail, password) {
       this.loading = true
       this.error = null
 
       try {
-        // using the auth service to handle login logic
-        const user = await authService.login(username, password)
+        const user = await authService.login(usernameOrEmail, password)
 
         this.user = user
         this.isAuthenticated = true
@@ -24,8 +23,27 @@ export const useAuthStore = defineStore('auth', {
         return true
       } catch (error) {
         this.error = error.message
+        return false
+      } finally {
+        this.loading = false
       }
-      this.loading = false
+    },
+
+    // Add signup action
+    async signup(userData) {
+      this.loading = true
+      this.error = null
+
+      try {
+        await authService.signup(userData)
+        // Don't automatically log in, just return success
+        return true
+      } catch (error) {
+        this.error = error.message
+        return false
+      } finally {
+        this.loading = false
+      }
     },
 
     logout() {

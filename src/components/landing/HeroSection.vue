@@ -13,10 +13,7 @@
         </p>
 
         <div class="d-flex flex-column flex-sm-row justify-center gap-4">
-          <v-btn color="primary" size="large" @click="$router.push('/login')" class="px-8 py-3">
-            Start Managing Tasks
-            <v-icon right>mdi-arrow-right</v-icon>
-          </v-btn>
+          <v-btn color="primary" size="large" to="/login" class="mx-2"> Get Started </v-btn>
 
           <v-btn variant="outlined" size="large" class="px-8 py-3"> Watch Demo </v-btn>
         </div>

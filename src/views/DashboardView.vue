@@ -1,168 +1,150 @@
 <template>
-  <div class="d-flex">
-    <Sidebar />
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <v-card class="mb-6">
+          <v-card-title class="text-h4"> Welcome, {{ user?.name || 'User' }}! </v-card-title>
+          <v-card-subtitle> Here's an overview of your tasks </v-card-subtitle>
+        </v-card>
+      </v-col>
 
-    <v-main class="bg-grey-lighten-4">
-      <v-container fluid class="pa-6">
-        <!-- Header -->
-        <DashboardHeader :user="user" />
+      <!-- Task Summary Cards -->
+      <v-col cols="12" md="4">
+        <v-card class="mb-4" color="primary" dark>
+          <v-card-text class="text-center py-6">
+            <div class="text-h3 mb-2">{{ totalTasks }}</div>
+            <div class="text-subtitle-1">Total Tasks</div>
+          </v-card-text>
+        </v-card>
+      </v-col>
 
-        <!-- Stats Cards -->
-        <StatsCards :stats="stats" class="mb-8" />
+      <v-col cols="12" md="4">
+        <v-card class="mb-4" color="success" dark>
+          <v-card-text class="text-center py-6">
+            <div class="text-h3 mb-2">{{ completedTasks.length }}</div>
+            <div class="text-subtitle-1">Completed Tasks</div>
+          </v-card-text>
+        </v-card>
+      </v-col>
 
-        <!-- Charts Section -->
-        <v-row class="mb-8">
-          <v-col cols="12" lg="6">
-            <CategoryChart :data="categoryData" />
-          </v-col>
-          <v-col cols="12" lg="6">
-            <WeeklyActivityChart :data="weeklyData" />
-          </v-col>
-        </v-row>
+      <v-col cols="12" md="4">
+        <v-card class="mb-4" color="warning" dark>
+          <v-card-text class="text-center py-6">
+            <div class="text-h3 mb-2">{{ pendingTasks.length }}</div>
+            <div class="text-subtitle-1">Pending Tasks</div>
+          </v-card-text>
+        </v-card>
+      </v-col>
 
-        <!-- Bottom Section -->
-        <v-row>
-          <v-col cols="12" lg="8">
-            <UpcomingTasks :tasks="upcomingTasks" />
-          </v-col>
-          <v-col cols="12" lg="4">
-            <ProductivityTrend :data="productivityData" />
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </div>
+      <!-- Recent Tasks -->
+      <v-col cols="12">
+        <v-card>
+          <v-card-title class="d-flex justify-space-between align-center">
+            <span>Recent Tasks</span>
+            <v-btn color="primary" variant="text" to="/tasks">
+              View All
+              <v-icon right>mdi-arrow-right</v-icon>
+            </v-btn>
+          </v-card-title>
+
+          <v-divider></v-divider>
+
+          <v-list v-if="recentTasks.length > 0">
+            <v-list-item
+              v-for="task in recentTasks"
+              :key="task.id"
+              :title="task.title"
+              :subtitle="task.description"
+            >
+              <template v-slot:prepend>
+                <v-icon :color="task.completed ? 'success' : 'warning'">
+                  {{ task.completed ? 'mdi-check-circle' : 'mdi-clock-outline' }}
+                </v-icon>
+              </template>
+
+              <template v-slot:append>
+                <v-chip size="small" :color="getPriorityColor(task.priority)" text-color="white">
+                  {{ task.priority }}
+                </v-chip>
+              </template>
+            </v-list-item>
+          </v-list>
+
+          <v-card-text v-else class="text-center py-8">
+            <v-icon size="48" color="grey-lighten-1" class="mb-4"
+              >mdi-clipboard-text-outline</v-icon
+            >
+            <p class="text-body-1 text-grey-darken-1">No tasks found</p>
+            <v-btn color="primary" class="mt-4" to="/tasks"> Create Task </v-btn>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import Sidebar from '../components/layout/Sidebar.vue'
-import DashboardHeader from '../components/dashboard/DashboardHeader.vue'
-import StatsCards from '../components/dashboard/StatsCards.vue'
-import CategoryChart from '../components/dashboard/CategoryChart.vue'
-import WeeklyActivityChart from '../components/dashboard/WeeklyActivityChart.vue'
-import UpcomingTasks from '../components/dashboard/UpcomingTasks.vue'
-import ProductivityTrend from '../components/dashboard/ProductivityTrend.vue'
+import { mapState } from 'pinia'
+import { useAuthStore } from '@/stores/auth'
+import { useTaskStore } from '@/stores/task'
 
 export default {
-  name: 'DashboardPage',
-  components: {
-    Sidebar,
-    DashboardHeader,
-    StatsCards,
-    CategoryChart,
-    WeeklyActivityChart,
-    UpcomingTasks,
-    ProductivityTrend,
-  },
-  data() {
-    return {
-      user: null,
-      tasks: [],
-      categoryData: [
-        { name: 'Work', value: 12, color: '#3B82F6' },
-        { name: 'Personal', value: 8, color: '#10B981' },
-        { name: 'Shopping', value: 5, color: '#F59E0B' },
-        { name: 'Health', value: 3, color: '#EF4444' },
-      ],
-      weeklyData: [
-        { day: 'Mon', completed: 4, created: 6 },
-        { day: 'Tue', completed: 6, created: 8 },
-        { day: 'Wed', completed: 8, created: 5 },
-        { day: 'Thu', completed: 5, created: 7 },
-        { day: 'Fri', completed: 9, created: 9 },
-        { day: 'Sat', completed: 3, created: 4 },
-        { day: 'Sun', completed: 2, created: 3 },
-      ],
-      productivityData: [
-        { month: 'Jan', productivity: 65 },
-        { month: 'Feb', productivity: 72 },
-        { month: 'Mar', productivity: 68 },
-        { month: 'Apr', productivity: 85 },
-        { month: 'May', productivity: 92 },
-        { month: 'Jun', productivity: 88 },
-      ],
-    }
-  },
+  name: 'DashboardView',
   computed: {
-    stats() {
-      const totalTasks = this.tasks.length
-      const completedTasks = this.tasks.filter((task) => task.completed).length
-      const pendingTasks = totalTasks - completedTasks
-      const completionRate = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0
+    ...mapState(useAuthStore, ['user', 'isAuthenticated']),
+    ...mapState(useTaskStore, ['tasks', 'loading', 'error']),
 
-      return {
-        totalTasks,
-        completedTasks,
-        pendingTasks,
-        completionRate: Math.round(completionRate),
-      }
+    completedTasks() {
+      return this.tasks.filter((task) => task.completed)
     },
-    upcomingTasks() {
-      return this.tasks
-        .filter((task) => !task.completed)
-        .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
+
+    pendingTasks() {
+      return this.tasks.filter((task) => !task.completed)
+    },
+
+    totalTasks() {
+      return this.tasks.length
+    },
+
+    // Get 5 most recent tasks
+    recentTasks() {
+      return [...this.tasks]
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .slice(0, 5)
     },
   },
-  created() {
-    this.loadUserData()
-    this.loadTasks()
-  },
-  methods: {
-    loadUserData() {
-      const userData = localStorage.getItem('user')
-      if (userData) {
-        this.user = JSON.parse(userData)
-      }
-    },
-    loadTasks() {
-      const mockTasks = [
-        {
-          id: 1,
-          title: 'Complete project proposal',
-          description: 'Finish the Q4 project proposal for client review',
-          category: 'Work',
-          dueDate: '2024-01-15',
-          completed: false,
-          priority: 'high',
-        },
-        {
-          id: 2,
-          title: 'Buy groceries',
-          description: 'Weekly grocery shopping',
-          category: 'Personal',
-          dueDate: '2024-01-12',
-          completed: true,
-          priority: 'medium',
-        },
-        {
-          id: 3,
-          title: 'Team meeting preparation',
-          description: 'Prepare slides for Monday team meeting',
-          category: 'Work',
-          dueDate: '2024-01-14',
-          completed: false,
-          priority: 'high',
-        },
-        {
-          id: 4,
-          title: 'Gym workout',
-          description: 'Evening workout session',
-          category: 'Health',
-          dueDate: '2024-01-13',
-          completed: true,
-          priority: 'low',
-        },
-      ]
 
-      const savedTasks = localStorage.getItem('tasks')
-      if (savedTasks) {
-        this.tasks = JSON.parse(savedTasks)
-      } else {
-        this.tasks = mockTasks
-        localStorage.setItem('tasks', JSON.stringify(mockTasks))
+  methods: {
+    getPriorityColor(priority) {
+      switch (priority) {
+        case 'high':
+          return 'error'
+        case 'medium':
+          return 'warning'
+        case 'low':
+          return 'success'
+        default:
+          return 'grey'
       }
     },
+  },
+
+  mounted() {
+    // Check if user is authenticated
+    const authStore = useAuthStore()
+    authStore.checkAuth()
+
+    // Redirect to login if not authenticated
+    if (!authStore.isAuthenticated) {
+      this.$router.push('/login')
+      return
+    }
+
+    // Fetch tasks when component mounts
+    const taskStore = useTaskStore()
+    taskStore.fetchTasks(this.user?.id)
   },
 }
 </script>
+
+<style lang="scss" scoped></style>

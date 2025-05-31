@@ -8,6 +8,16 @@
     </v-card-title>
 
     <v-card-text>
+      <!-- Success message alert -->
+      <v-alert v-if="successMessage" type="success" class="mb-4" density="compact">
+        {{ successMessage }}
+      </v-alert>
+
+      <!-- Error message alert -->
+      <v-alert v-if="error" type="error" class="mb-4" density="compact">
+        {{ error }}
+      </v-alert>
+
       <v-tabs v-model="activeTab" centered>
         <v-tab value="login">Sign In</v-tab>
         <v-tab value="signup">Sign Up</v-tab>
@@ -30,7 +40,7 @@
 
             <v-text-field
               v-model="loginForm.password"
-              :label="'Password'"
+              label="Password"
               :type="showPassword ? 'text' : 'password'"
               prepend-inner-icon="mdi-lock"
               :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -46,16 +56,12 @@
               color="primary"
               block
               size="large"
-              :loading="isLoading"
-              :disabled="isLoading"
+              :loading="loading"
+              :disabled="loading"
               class="mb-4"
             >
-              {{ isLoading ? 'Signing in...' : 'Sign In' }}
+              {{ loading ? 'Signing in...' : 'Sign In' }}
             </v-btn>
-
-            <v-alert v-if="error" type="error" class="mt-3" dense>
-              {{ error }}
-            </v-alert>
           </v-form>
         </v-tabs-window-item>
 
@@ -96,7 +102,6 @@
               class="mb-4"
             />
 
-            <!-- New confirm password field -->
             <v-text-field
               v-model="signupForm.confirmPassword"
               label="Confirm Password"
@@ -115,10 +120,11 @@
               color="primary"
               block
               size="large"
-              :loading="isLoading"
+              :loading="loading"
+              :disabled="loading"
               class="mb-4"
             >
-              {{ isLoading ? 'Creating account...' : 'Create Account' }}
+              {{ loading ? 'Creating account...' : 'Create Account' }}
             </v-btn>
           </v-form>
         </v-tabs-window-item>
@@ -139,6 +145,10 @@ export default {
       type: String,
       default: null,
     },
+    successMessage: {
+      type: String,
+      default: null,
+    },
   },
   emits: ['login', 'signup'],
   data() {
@@ -147,7 +157,6 @@ export default {
       showPassword: false,
       showPasswordSignup: false,
       showConfirmPassword: false,
-      isLoading: false,
       loginForm: {
         email: '',
         password: '',
@@ -170,7 +179,6 @@ export default {
         (v) => !!v || 'Name is required',
         (v) => v.length >= 2 || 'Name must be at least 2 characters',
       ],
-      // New rules for confirm password
       confirmPasswordRules: [
         (v) => !!v || 'Please confirm your password',
         (v) => v === this.signupForm.password || 'Passwords do not match',
@@ -182,11 +190,7 @@ export default {
       const { valid } = await this.$refs.loginForm.validate()
       if (!valid) return
 
-      this.isLoading = true
       this.$emit('login', this.loginForm)
-      setTimeout(() => {
-        this.isLoading = false
-      }, 1000)
     },
     async submitSignup() {
       const { valid } = await this.$refs.signupForm.validate()
@@ -197,11 +201,11 @@ export default {
         return
       }
 
-      this.isLoading = true
       this.$emit('signup', this.signupForm)
-      setTimeout(() => {
-        this.isLoading = false
-      }, 1000)
+    },
+    // Add method to switch tabs programmatically
+    switchTab(tab) {
+      this.activeTab = tab
     },
   },
 }
