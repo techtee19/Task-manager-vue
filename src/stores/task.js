@@ -12,21 +12,6 @@ export const useTaskStore = defineStore('task', {
     completedTasks: (state) => state.tasks.filter((task) => task.completed),
     pendingTasks: (state) => state.tasks.filter((task) => !task.completed),
     totalTasks: (state) => state.tasks.length,
-
-    // Get tasks by priority
-    highPriorityTasks: (state) => state.tasks.filter((task) => task.priority === 'high'),
-    mediumPriorityTasks: (state) => state.tasks.filter((task) => task.priority === 'medium'),
-    lowPriorityTasks: (state) => state.tasks.filter((task) => task.priority === 'low'),
-
-    // Get tasks by user
-    tasksByUser: (state) => (userId) => state.tasks.filter((task) => task.userId === userId),
-
-    // Get recent tasks (5 most recent)
-    recentTasks: (state) => {
-      return [...state.tasks]
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .slice(0, 5)
-    },
   },
 
   actions: {
@@ -35,17 +20,18 @@ export const useTaskStore = defineStore('task', {
       this.error = null
 
       try {
-        let tasks = await taskService.getTasks()
+        console.log('Fetching tasks for user:', userId)
+        const tasks = await taskService.getTasks()
 
         // Filter by userId if provided
-        if (userId) {
-          tasks = tasks.filter((task) => task.userId === userId)
-        }
+        this.tasks = userId ? tasks.filter((task) => task.userId === userId) : tasks
 
-        this.tasks = tasks
+        console.log('Fetched tasks:', this.tasks)
+        return this.tasks
       } catch (error) {
-        this.error = 'Failed to fetch tasks: ' + error.message
-        console.error(error)
+        console.error('Error fetching tasks:', error)
+        this.error = error.message || 'Failed to fetch tasks'
+        return []
       } finally {
         this.loading = false
       }
@@ -56,30 +42,44 @@ export const useTaskStore = defineStore('task', {
       this.error = null
 
       try {
-        const newTask = await taskService.addTask({
-          ...task,
-          userId: task.userId || 1, // Default to user 1 if not specified
-          priority: task.priority || 'medium', // Default priority
-          createdAt: new Date().toISOString(),
-        })
+        console.log('Adding task in store:', task)
 
-        this.tasks.push(newTask)
-        return newTask
+        // Ensure task has all required properties
+        const newTask = {
+          title: task.title,
+          description: task.description || '',
+          priority: task.priority || 'medium',
+          category: task.category || 'Work',
+          completed: false,
+          userId: task.userId,
+          createdAt: new Date().toISOString(),
+          dueDate: task.dueDate || null,
+        }
+
+        // Call the service to add the task
+        const createdTask = await taskService.addTask(newTask)
+        console.log('Task created in API:', createdTask)
+
+        // Add the new task to the local state
+        this.tasks.push(createdTask)
+
+        return createdTask
       } catch (error) {
-        this.error = 'Failed to add task: ' + error.message
-        console.error(error)
-        return null
+        console.error('Error adding task:', error)
+        this.error = error.message || 'Failed to add task'
+        throw error
       } finally {
         this.loading = false
       }
     },
 
-    async updateTask(id, updatedData) {
+    async updateTask(id, taskData) {
       this.loading = true
       this.error = null
 
       try {
-        const updatedTask = await taskService.updateTask(id, updatedData)
+        // Call the service to update the task
+        const updatedTask = await taskService.updateTask(id, taskData)
 
         // Update the task in the local state
         const index = this.tasks.findIndex((t) => t.id === id)
@@ -89,32 +89,9 @@ export const useTaskStore = defineStore('task', {
 
         return updatedTask
       } catch (error) {
-        this.error = 'Failed to update task: ' + error.message
-        console.error(error)
-        return null
-      } finally {
-        this.loading = false
-      }
-    },
-
-    async completeTask(id) {
-      this.loading = true
-      this.error = null
-
-      try {
-        const completedTask = await taskService.completeTask(id)
-
-        // Update the task in the local state
-        const index = this.tasks.findIndex((t) => t.id === id)
-        if (index !== -1) {
-          this.tasks[index] = completedTask
-        }
-
-        return completedTask
-      } catch (error) {
-        this.error = 'Failed to complete task: ' + error.message
-        console.error(error)
-        return null
+        console.error('Error updating task:', error)
+        this.error = error.message || 'Failed to update task'
+        throw error
       } finally {
         this.loading = false
       }
@@ -125,56 +102,42 @@ export const useTaskStore = defineStore('task', {
       this.error = null
 
       try {
+        // Call the service to delete the task
         await taskService.deleteTask(id)
 
         // Remove the task from the local state
         this.tasks = this.tasks.filter((t) => t.id !== id)
+
         return true
       } catch (error) {
-        this.error = 'Failed to delete task: ' + error.message
-        console.error(error)
-        return false
+        console.error('Error deleting task:', error)
+        this.error = error.message || 'Failed to delete task'
+        throw error
       } finally {
         this.loading = false
       }
     },
 
-    // Filter tasks by completion status
-    filterByStatus(status) {
-      if (status === 'completed') {
-        return this.completedTasks
-      } else if (status === 'pending') {
-        return this.pendingTasks
-      } else {
-        return this.tasks
-      }
-    },
-
-    // Filter tasks by priority
-    filterByPriority(priority) {
-      return this.tasks.filter((task) => task.priority === priority)
-    },
-
-    // Sort tasks by different criteria
-    sortTasks(criteria) {
-      const sortedTasks = [...this.tasks]
-
-      switch (criteria) {
-        case 'dateAsc':
-          return sortedTasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
-        case 'dateDesc':
-          return sortedTasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        case 'priority':
-          const priorityOrder = { high: 1, medium: 2, low: 3 }
-          return sortedTasks.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority])
-        default:
-          return sortedTasks
-      }
-    },
-
-    // Clear all errors
-    clearErrors() {
+    // Add or modify the completeTask action in your task store
+    async completeTask(id) {
+      this.loading = true
       this.error = null
+
+      try {
+        // Update the task with completed status
+        const updatedTask = await this.updateTask(id, {
+          completed: true,
+          completedAt: new Date().toISOString(),
+        })
+
+        return updatedTask
+      } catch (error) {
+        console.error('Error completing task:', error)
+        this.error = error.message || 'Failed to complete task'
+        throw error
+      } finally {
+        this.loading = false
+      }
     },
   },
 })

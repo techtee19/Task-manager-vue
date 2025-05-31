@@ -1,43 +1,75 @@
 import axios from 'axios'
-import { Title } from 'chart.js'
 
+// Use JSON Server URL or adjust for your backend
 const API_URL = 'http://localhost:3000'
 
-export default {
+const taskService = {
   async getTasks() {
-    return axios.get(`${API_URL}/tasks`).then((response) => response.data)
-  },
-
-  //   Add tasks
-  async addTasks(task) {
-    const newTask = {
-      title: task.title,
-      description: task.description,
-      completed: false,
-      createdAt: new Date().toISOString(),
+    try {
+      const response = await axios.get(`${API_URL}/tasks`)
+      return response.data
+    } catch (error) {
+      console.error('API Error - getTasks:', error)
+      throw error
     }
-
-    return axios.post(`${API_URL}/tasks`, newTask).then((response) => response.data)
   },
 
-  //   Mark tasks as completed
-
-  async completeTask(id) {
-    const res = await axios.get(`${API_URL}/tasks/${id}`)
-    const task = res.data
-
-    // update task
-    const updatedTask = {
-      ...task,
-      completed: true,
-      completedAt: new Date().toISOString(),
+  async getTaskById(id) {
+    try {
+      const response = await axios.get(`${API_URL}/tasks/${id}`)
+      return response.data
+    } catch (error) {
+      console.error('API Error - getTaskById:', error)
+      throw error
     }
-
-    return axios.put(`${API_URL}/tasks/${id}`, updatedTask).then((response) => response.data)
   },
 
-  //  Delete tasks
+  async addTask(task) {
+    try {
+      const response = await axios.post(`${API_URL}/tasks`, task)
+      return response.data
+    } catch (error) {
+      console.error('API Error - addTask:', error)
+      throw error
+    }
+  },
+
+  async updateTask(id, taskData) {
+    try {
+      // First get the existing task to merge data properly
+      let existingTask
+      try {
+        const response = await axios.get(`${API_URL}/tasks/${id}`)
+        existingTask = response.data
+      } catch (e) {
+        // If task doesn't exist, create a new task object
+        existingTask = { id }
+      }
+
+      // Merge updates with existing data
+      const updatedTask = {
+        ...existingTask,
+        ...taskData,
+      }
+
+      // Make the update request
+      const response = await axios.put(`${API_URL}/tasks/${id}`, updatedTask)
+      return response.data
+    } catch (error) {
+      console.error('API Error - updateTask:', error)
+      throw error
+    }
+  },
+
   async deleteTask(id) {
-    return axios.delete(`${API_URL}/tasks/${id}`).then((response) => response.data)
+    try {
+      await axios.delete(`${API_URL}/tasks/${id}`)
+      return true
+    } catch (error) {
+      console.error('API Error - deleteTask:', error)
+      throw error
+    }
   },
 }
+
+export default taskService

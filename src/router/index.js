@@ -32,6 +32,36 @@ const routes = [
     component: () => import('@/views/HistoryView.vue'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/analytics',
+    name: 'analytics',
+    component: () => import('@/views/AnalyticsView.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/calendar',
+    name: 'calendar',
+    component: () => import('@/views/CalendarView.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: () => import('@/views/SettingsView.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/tasks/new',
+    name: 'new-task',
+    component: () => import('@/views/TaskFormView.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/tasks/edit/:id',
+    name: 'edit-task',
+    component: () => import('@/views/TaskFormView.vue'),
+    meta: { requiresAuth: true },
+  },
 ]
 
 const router = createRouter({
