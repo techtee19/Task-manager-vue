@@ -184,6 +184,40 @@
       "userId": "83f8",
       "createdAt": "2025-05-31T17:25:07.645Z",
       "dueDate": "2025-06-03T23:00:00.000Z"
+    },
+    {
+      "id": "d3b7",
+      "title": "asvhgfdsa",
+      "description": "dfhgdvsfgthfjghk,jhngbfv",
+      "priority": "high",
+      "category": "Personal",
+      "completed": true,
+      "userId": "1",
+      "createdAt": "2025-06-01T22:02:34.437Z",
+      "dueDate": "2025-06-03T23:00:00.000Z",
+      "completedAt": "2025-06-01T22:03:11.796Z"
+    },
+    {
+      "id": "09c2",
+      "title": "axcghvjggtred",
+      "description": "yy,kytrert5u7iio",
+      "priority": "medium",
+      "category": "Learning",
+      "completed": false,
+      "userId": "1",
+      "createdAt": "2025-06-01T22:02:47.479Z",
+      "dueDate": "2025-06-05T23:00:00.000Z"
+    },
+    {
+      "id": "f835",
+      "title": "jghfdesdefrgthyju",
+      "description": "ertgyujioluhyjgtre",
+      "priority": "medium",
+      "category": "Health",
+      "completed": false,
+      "userId": "1",
+      "createdAt": "2025-06-01T22:03:06.581Z",
+      "dueDate": "2025-06-01T23:00:00.000Z"
     }
   ]
 }
