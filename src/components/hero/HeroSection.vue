@@ -42,8 +42,45 @@
 
 <script>
 export default {
-  name: 'Hero',
+  name: 'HeroSection',
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.hero-section {
+  background: linear-gradient(180deg, #eef2ff 0%, #e0f2fe 100%);
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.headline-gradient {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.headline-dark {
+  color: #1e293b;
+}
+
+.headline-blue {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.headline-purple {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subheadline {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #475569;
+}
+</style>

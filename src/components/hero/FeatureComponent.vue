@@ -82,8 +82,24 @@
 
 <script>
 export default {
-  name: 'Features',
+  name: 'FeatureComponent',
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.features-section {
+  background-color: #fff;
+}
+
+.feature-card {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+</style>

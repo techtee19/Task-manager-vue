@@ -103,7 +103,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'TestimonialSection',
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.testimonial-card {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+</style>
