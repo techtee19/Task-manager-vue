@@ -4,53 +4,25 @@
     <NavBar v-if="!isAuthenticated" />
 
     <!-- Hero Section -->
-    <hero-section />
+    <HeroSection />
 
     <!-- Features Section -->
-    <feature-component />
+    <FeatureComponent />
 
     <!-- Testimonials Section -->
-    <testimonial-section />
+    <TestimonialSection />
 
     <!-- Pricing Section -->
-    <pricing-section />
+    <PricingSection />
 
     <!-- FAQ Section -->
-    <faq-section />
+    <FaqSection />
 
     <!-- Final CTA Section -->
-    <final-cta-section />
+    <FinalCTASection />
 
     <!-- Footer -->
     <footer-section />
-
-    <!-- Video Dialog -->
-    <v-dialog v-model="showVideoDialog" max-width="800">
-      <v-card>
-        <v-card-title class="text-h5 font-weight-bold">
-          TaskFlow Demo
-          <v-spacer></v-spacer>
-          <v-btn icon @click="showVideoDialog = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-card-title>
-
-        <v-card-text class="pa-0">
-          <div class="video-container">
-            <!-- Replace with your actual video embed -->
-            <iframe
-              width="100%"
-              height="450"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="TaskFlow Demo"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
   </div>
 </template>
 
@@ -78,20 +50,11 @@ export default {
     FinalCTASection,
     FooterSection,
   },
-  data() {
-    HeroSection
-    return {
-      showVideoDialog: false,
-    }
-  },
+
   computed: {
     ...mapState(useAuthStore, ['isAuthenticated']),
   },
-  methods: {
-    openVideoDialog() {
-      this.showVideoDialog = true
-    },
-  },
+
   mounted() {
     // If user is already authenticated, redirect to dashboard
     if (this.isAuthenticated) {

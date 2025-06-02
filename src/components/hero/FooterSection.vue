@@ -5,7 +5,7 @@
         <v-col cols="12" md="4" class="mb-6 mb-md-0">
           <div class="d-flex align-center mb-4">
             <v-icon color="white" size="32" class="mr-2">mdi-check-circle</v-icon>
-            <span class="text-h5 font-weight-medium text-white">TaskFlow</span>
+            <span class="text-h5 font-weight-medium text-white">ZenTasks</span>
           </div>
           <p class="text-body-2 text-grey-lighten-1 mb-4">
             Organize your tasks, amplify your productivity, and achieve more every day.
@@ -79,7 +79,7 @@
       <v-divider color="grey-darken-2" class="my-6"></v-divider>
 
       <div class="text-center text-grey-lighten-1 text-caption">
-        © {{ new Date().getFullYear() }} TaskFlow. All rights reserved.
+        © {{ new Date().getFullYear() }} ZenTasks. All rights reserved.
       </div>
     </v-container>
   </v-footer>

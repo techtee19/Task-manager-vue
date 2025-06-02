@@ -10,15 +10,15 @@
           </h1>
 
           <p class="subheadline mb-12">
-            TaskFlow helps you manage your tasks efficiently with powerful categorization,
-            insightful analytics, and a beautiful interface that makes productivity enjoyable.
+            ZenTask helps you manage your tasks efficiently with powerful categorization, insightful
+            analytics, and a beautiful interface that makes productivity enjoyable.
           </p>
 
           <div class="d-flex justify-center flex-wrap">
             <v-btn
               color="black"
               size="large"
-              class="text-none px-8 py-6 mr-4 mb-2"
+              class="text-none mr-4 mb-2"
               to="/login"
               append-icon="mdi-arrow-right"
             >
@@ -28,10 +28,10 @@
               variant="outlined"
               color="grey-darken-3"
               size="large"
-              class="text-none px-8 py-6 mb-2"
-              @click="openVideoDialog"
+              class="text-none mb-2"
+              to="/login?mode=signup"
             >
-              Watch Demo
+              Sign Up
             </v-btn>
           </div>
         </v-col>

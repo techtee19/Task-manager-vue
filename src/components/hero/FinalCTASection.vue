@@ -9,44 +9,12 @@
           <p class="text-h6 text-white mb-12">
             Join thousands of users who have transformed their task management with TaskFlow.
           </p>
-          <v-btn
-            color="white"
-            size="large"
-            class="text-none primary--text px-8 py-6"
-            to="/register"
-          >
+          <v-btn color="white" size="large" class="text-none primary--text" to="/login?mode=signup">
             Get Started for Free
           </v-btn>
         </v-col>
       </v-row>
     </v-container>
-
-    <v-dialog v-model="showVideoDialog" max-width="800">
-      <v-card>
-        <v-card-title class="text-h5 font-weight-bold">
-          TaskFlow Demo
-          <v-spacer></v-spacer>
-          <v-btn icon @click="showVideoDialog = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-card-title>
-
-        <v-card-text class="pa-0">
-          <div class="video-container">
-            <!-- Replace with your actual video embed -->
-            <iframe
-              width="100%"
-              height="450"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="TaskFlow Demo"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
   </div>
 </template>
 

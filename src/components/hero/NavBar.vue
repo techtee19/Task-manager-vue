@@ -19,7 +19,7 @@
 
         <div>
           <v-btn variant="text" class="text-none mr-2" to="/login">Sign In</v-btn>
-          <v-btn color="black" class="text-none" to="/register">Get Started</v-btn>
+          <v-btn color="black" variant="outlined" class="text-none" to="/login">Get Started</v-btn>
         </div>
       </v-container>
     </v-app-bar>
