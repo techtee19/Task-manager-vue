@@ -19,32 +19,33 @@ export default {
       type: Object,
       required: true,
     },
-  },
-  computed: {
+  },  computed: {
     chartOptions() {
+      const isMobile = window.innerWidth < 600;
+      
       return {
         responsive: true,
         maintainAspectRatio: false,
-        cutout: '70%',
+        cutout: isMobile ? '60%' : '70%',
         plugins: {
           legend: {
-            position: 'right',
+            position: isMobile ? 'bottom' : 'right',
             labels: {
-              boxWidth: 12,
-              padding: 15,
+              boxWidth: isMobile ? 10 : 12,
+              padding: isMobile ? 10 : 15,
               font: {
-                size: 12,
+                size: isMobile ? 10 : 12,
               },
             },
           },
           tooltip: {
             backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            padding: 10,
+            padding: isMobile ? 6 : 10,
             bodyFont: {
-              size: 12,
+              size: isMobile ? 10 : 12,
             },
             titleFont: {
-              size: 14,
+              size: isMobile ? 12 : 14,
             },
             caretSize: 6,
             cornerRadius: 4,

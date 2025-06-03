@@ -24,4 +24,48 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.cta-section {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .text-h2 {
+    font-size: 1.75rem !important;
+  }
+  
+  .text-h6 {
+    font-size: 1rem !important;
+  }
+  
+  .py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .mb-12 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .mb-4 {
+    margin-bottom: 0.5rem !important;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 601px) and (max-width: 960px) {
+  .text-h2 {
+    font-size: 2.25rem !important;
+  }
+  
+  .py-16 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  .mb-12 {
+    margin-bottom: 2rem !important;
+  }
+}
+</style>

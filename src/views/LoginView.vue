@@ -12,13 +12,13 @@
           </router-link>
         </div>
 
-        <!-- Login Card -->
-        <logi-in-form
+        <!-- Login Card -->        <logi-in-form
           @login="handleLogin"
           @signup="handleSignup"
           :loading="loading"
           :error="error"
           :success-message="successMessage"
+          :initial-mode="mode"
         />
 
         <!-- Back to Home -->
@@ -41,6 +41,12 @@ export default {
   name: 'LoginPage',
   components: {
     LogiInForm,
+  },
+  props: {
+    mode: {
+      type: String,
+      default: 'login',
+    }
   },
   data() {
     return {
@@ -126,7 +132,24 @@ export default {
 
 <style scoped>
 .login-page {
-  background: linear-gradient(135deg, #ebf8ff 0%, #ffffff 50%, #f3e8ff 100%);
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #f8fafc;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .v-col {
+    padding: 16px !important;
+  }
+  
+  .mb-8 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .mt-6 {
+    margin-top: 1rem !important;
+  }
 }
 </style>

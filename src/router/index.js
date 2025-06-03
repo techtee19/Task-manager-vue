@@ -15,6 +15,13 @@ const routes = [
     meta: { requiresAuth: false },
   },
   {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/LoginView.vue'),
+    meta: { requiresAuth: false },
+    props: { mode: 'signup' },
+  },
+  {
     path: '/dashboard',
     name: 'dashboard',
     component: () => import('@/views/DashboardView.vue'),

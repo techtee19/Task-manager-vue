@@ -135,25 +135,90 @@ export default {
 </script>
 
 <style scoped>
-.pricing-card {
-  border: 1px solid rgba(0, 0, 0, 0.05);
+.pricing-section {
   position: relative;
 }
 
+.pricing-card {
+  position: relative;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
 .pricing-card--popular {
-  border: 2px solid var(--v-primary-base);
-  transform: scale(1.05);
+  border: 1px solid rgb(var(--v-theme-primary));
 }
 
 .popular-badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background-color: var(--v-primary-base);
+  top: 0;
+  right: 2rem;
+  background: rgb(var(--v-theme-primary));
   color: white;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  padding: 0.25rem 1rem;
+  border-radius: 0 0 8px 8px;
+  font-weight: 500;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .text-h2 {
+    font-size: 2rem !important;
+  }
+  
+  .text-h6 {
+    font-size: 1rem !important;
+  }
+  
+  .text-h5 {
+    font-size: 1.25rem !important;
+  }
+  
+  .text-h3 {
+    font-size: 1.75rem !important;
+  }
+  
+  .py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .mb-12 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .mb-6 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .mb-4 {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .pricing-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .popular-badge {
+    right: 1rem;
+    padding: 0.15rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 601px) and (max-width: 960px) {
+  .text-h2 {
+    font-size: 2.5rem !important;
+  }
+  
+  .py-16 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  .pricing-card {
+    margin-bottom: 1.5rem;
+  }
 }
 </style>

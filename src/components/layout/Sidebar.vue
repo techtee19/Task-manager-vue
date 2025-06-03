@@ -1,5 +1,12 @@
 <template>
-  <v-navigation-drawer permanent color="white" border width="260">
+  <v-navigation-drawer
+    v-model="drawer"
+    :permanent="$vuetify.display.lgAndUp"
+    :temporary="!$vuetify.display.lgAndUp"
+    color="white" 
+    border 
+    width="260"
+  >
     <!-- App Logo -->
     <div class="d-flex align-center px-4 py-4">
       <v-icon color="primary" size="32" class="mr-2">mdi-check-circle</v-icon>
@@ -73,6 +80,7 @@ export default {
   name: 'AppSidebar',
   data() {
     return {
+      drawer: true,
       showUserMenu: false,
       navItems: [
         { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/dashboard' },

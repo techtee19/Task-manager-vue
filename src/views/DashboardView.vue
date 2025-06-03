@@ -345,11 +345,28 @@ export default {
 
 <style scoped>
 .dashboard-container {
-  max-width: 1400px;
-  margin: 0 auto;
+  max-width: 100%;
 }
 
-.v-card {
-  border: 1px solid rgba(0, 0, 0, 0.05);
+/* Make text responsive on small screens */
+@media (max-width: 600px) {
+  .text-h4 {
+    font-size: 1.5rem !important;
+  }
+  
+  .text-h3 {
+    font-size: 1.75rem !important;
+  }
+  
+  .text-subtitle-1 {
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Add some spacing on mobile devices */
+@media (max-width: 960px) {
+  .v-col {
+    padding-bottom: 12px;
+  }
 }
 </style>

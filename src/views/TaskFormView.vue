@@ -220,11 +220,34 @@ export default {
 
 <style scoped>
 .task-form-container {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 100%;
 }
 
-.border {
-  border: 1px solid rgba(0, 0, 0, 0.05);
+/* Mobile-specific styles */
+@media (max-width: 600px) {
+  .text-h4 {
+    font-size: 1.5rem !important;
+  }
+  
+  .v-card-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .v-card-actions .v-btn {
+    width: 100%;
+    margin-right: 0 !important;
+  }
+  
+  .v-card-actions .v-spacer {
+    display: none;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 960px) and (min-width: 601px) {
+  .task-form-container {
+    padding: 1.5rem !important;
+  }
 }
 </style>

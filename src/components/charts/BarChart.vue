@@ -27,9 +27,10 @@ export default {
       type: Object,
       required: true,
     },
-  },
-  computed: {
+  },  computed: {
     chartOptions() {
+      const isMobile = window.innerWidth < 600;
+      
       return {
         responsive: true,
         maintainAspectRatio: false,
@@ -42,7 +43,7 @@ export default {
             },
             ticks: {
               font: {
-                size: 10,
+                size: isMobile ? 8 : 10,
               },
             },
           },
@@ -52,14 +53,16 @@ export default {
             },
             ticks: {
               font: {
-                size: 10,
+                size: isMobile ? 8 : 10,
               },
+              maxRotation: isMobile ? 45 : 0,
+              minRotation: isMobile ? 45 : 0,
             },
           },
         },
         plugins: {
           legend: {
-            display: true,
+            display: !isMobile,
             position: 'top',
             align: 'end',
             labels: {
@@ -72,19 +75,19 @@ export default {
           },
           tooltip: {
             backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            padding: 10,
+            padding: isMobile ? 6 : 10,
             bodyFont: {
-              size: 12,
+              size: isMobile ? 10 : 12,
             },
             titleFont: {
-              size: 14,
+              size: isMobile ? 12 : 14,
             },
             caretSize: 6,
             cornerRadius: 4,
           },
         },
-        barPercentage: 0.6,
-        categoryPercentage: 0.8,
+        barPercentage: isMobile ? 0.8 : 0.6,
+        categoryPercentage: isMobile ? 0.9 : 0.8,
       }
     },
   },

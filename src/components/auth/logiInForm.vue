@@ -210,3 +210,33 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.v-card {
+  width: 100%;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 600px) {
+  .v-card {
+    padding: 1rem !important;
+  }
+  
+  .text-h4 {
+    font-size: 1.5rem !important;
+  }
+  
+  .text-body-1 {
+    font-size: 0.875rem !important;
+  }
+  
+  .v-text-field {
+    margin-bottom: 1rem !important;
+  }
+  
+  .v-tabs .v-tab {
+    min-width: auto !important;
+    padding: 0 12px !important;
+  }
+}
+</style>

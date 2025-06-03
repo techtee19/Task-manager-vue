@@ -321,15 +321,34 @@ export default {
 
 <style scoped>
 .tasks-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 100%;
 }
 
-.border {
-  border: 1px solid rgba(0, 0, 0, 0.05);
+/* Responsive styling for mobile devices */
+@media (max-width: 600px) {
+  .text-h4 {
+    font-size: 1.5rem !important;
+  }
+  
+  .text-subtitle-1 {
+    font-size: 0.875rem !important;
+  }
+  
+  /* Adjust button size on small screens */
+  .v-btn {
+    padding: 0 16px !important;
+  }
+  
+  /* Make the search and filter sections stack better */
+  .gap-3 {
+    gap: 8px !important;
+  }
 }
 
-.gap-3 {
-  gap: 12px;
+/* Add more space between filter elements on tablet */
+@media (max-width: 960px) and (min-width: 601px) {
+  .gap-3 {
+    gap: 12px !important;
+  }
 }
 </style>

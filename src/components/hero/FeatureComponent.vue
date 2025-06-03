@@ -100,6 +100,58 @@ export default {
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .text-h2 {
+    font-size: 2rem !important;
+  }
+
+  .text-h6 {
+    font-size: 1rem !important;
+  }
+
+  .py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .mb-12 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .pa-6 {
+    padding: 1rem !important;
+  }
+
+  .mt-8 {
+    margin-top: 1rem !important;
+  }
+
+  .feature-card {
+    margin-bottom: 1rem;
+  }
+
+  .text-h5 {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 601px) and (max-width: 960px) {
+  .text-h2 {
+    font-size: 2.5rem !important;
+  }
+
+  .py-16 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .mb-12 {
+    margin-bottom: 2rem !important;
+  }
 }
 </style>

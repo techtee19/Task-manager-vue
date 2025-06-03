@@ -52,12 +52,14 @@ export default {
   min-height: 80vh;
   display: flex;
   align-items: center;
+  padding: 0 16px;
 }
 
 .headline-gradient {
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2rem, 5vw, 4rem);
   line-height: 1.2;
   font-weight: 800;
+  word-wrap: break-word;
 }
 
 .headline-dark {
@@ -66,21 +68,45 @@ export default {
 
 .headline-blue {
   background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .headline-purple {
   background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .subheadline {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto;
   color: #475569;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 600px) {
+  .hero-section {
+    min-height: 60vh;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  
+  .mb-12 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .v-btn {
+    margin-bottom: 0.5rem !important;
+  }
 }
 </style>
