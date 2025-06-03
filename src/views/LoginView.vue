@@ -13,7 +13,7 @@
         </div>
 
         <!-- Login Card -->
-        <LoginForm
+        <login-form
           @login="handleLogin"
           @signup="handleSignup"
           :loading="loading"
@@ -37,6 +37,7 @@
 import { mapState, mapActions } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 import LoginForm from '@/components/auth/LoginForm.vue'
+
 export default {
   name: 'LoginPage',
   components: {
