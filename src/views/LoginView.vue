@@ -13,7 +13,7 @@
         </div>
 
         <!-- Login Card -->
-        <logi-in-form
+        <login-form
           @login="handleLogin"
           @signup="handleSignup"
           :loading="loading"
@@ -36,12 +36,12 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
-import LogiInForm from '@/components/auth/logiInForm.vue'
+import LoginForm from '@/components/auth/loginForm.vue'
 
 export default {
   name: 'LoginPage',
   components: {
-    LogiInForm,
+    LoginForm,
   },
   props: {
     mode: {

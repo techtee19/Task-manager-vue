@@ -1,12 +1,9 @@
-import axios from 'axios'
+import api, { API_URL } from './api'
 
-// Use JSON Server URL or adjust for your backend
-const API_URL = 'http://localhost:3000'
-
-const taskService = {
-  async getTasks() {
+export default {
+  async getTasks(params = {}) {
     try {
-      const response = await axios.get(`${API_URL}/tasks`)
+      const response = await api.get('/tasks', { params })
       return response.data
     } catch (error) {
       console.error('API Error - getTasks:', error)
@@ -16,7 +13,7 @@ const taskService = {
 
   async getTaskById(id) {
     try {
-      const response = await axios.get(`${API_URL}/tasks/${id}`)
+      const response = await api.get(`/tasks/${id}`)
       return response.data
     } catch (error) {
       console.error('API Error - getTaskById:', error)
@@ -26,7 +23,7 @@ const taskService = {
 
   async addTask(task) {
     try {
-      const response = await axios.post(`${API_URL}/tasks`, task)
+      const response = await api.post('/tasks', task)
       return response.data
     } catch (error) {
       console.error('API Error - addTask:', error)
@@ -36,24 +33,7 @@ const taskService = {
 
   async updateTask(id, taskData) {
     try {
-      // First get the existing task to merge data properly
-      let existingTask
-      try {
-        const response = await axios.get(`${API_URL}/tasks/${id}`)
-        existingTask = response.data
-      } catch (e) {
-        // If task doesn't exist, create a new task object
-        existingTask = { id }
-      }
-
-      // Merge updates with existing data
-      const updatedTask = {
-        ...existingTask,
-        ...taskData,
-      }
-
-      // Make the update request
-      const response = await axios.put(`${API_URL}/tasks/${id}`, updatedTask)
+      const response = await api.put(`/tasks/${id}`, taskData)
       return response.data
     } catch (error) {
       console.error('API Error - updateTask:', error)
@@ -63,13 +43,97 @@ const taskService = {
 
   async deleteTask(id) {
     try {
-      await axios.delete(`${API_URL}/tasks/${id}`)
+      await api.delete(`/tasks/${id}`)
       return true
     } catch (error) {
       console.error('API Error - deleteTask:', error)
       throw error
     }
   },
-}
 
-export default taskService
+  async getTaskStatistics(userId) {
+    try {
+      // Get all tasks for the user
+      const tasks = await this.getTasks({ userId })
+
+      // Calculate statistics
+      const totalTasks = tasks.length
+      const completedTasks = tasks.filter((task) => task.completed).length
+      const pendingTasks = totalTasks - completedTasks
+
+      // Get overdue tasks (due date is in the past and not completed)
+      const today = new Date()
+      const overdueTasks = tasks.filter((task) => {
+        if (!task.dueDate || task.completed) return false
+        const dueDate = new Date(task.dueDate)
+        return dueDate < today
+      }).length
+
+      // Calculate completion rate
+      const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0
+
+      return {
+        total: totalTasks,
+        completed: completedTasks,
+        pending: pendingTasks,
+        overdue: overdueTasks,
+        completionRate: completionRate,
+      }
+    } catch (error) {
+      console.error('API Error - getTaskStatistics:', error)
+      throw error
+    }
+  },
+
+  async getTasksByPriority(userId) {
+    try {
+      const tasks = await this.getTasks({ userId })
+
+      // Group tasks by priority
+      const result = {
+        high: tasks.filter((task) => task.priority === 'high').length,
+        medium: tasks.filter((task) => task.priority === 'medium').length,
+        low: tasks.filter((task) => task.priority === 'low').length,
+      }
+
+      return result
+    } catch (error) {
+      console.error('API Error - getTasksByPriority:', error)
+      throw error
+    }
+  },
+
+  async getTasksCompletionByDay(userId, days = 7) {
+    try {
+      const tasks = await this.getTasks({ userId })
+
+      // Get dates for the last 'days' days
+      const dates = []
+      const today = new Date()
+
+      for (let i = days - 1; i >= 0; i--) {
+        const date = new Date(today)
+        date.setDate(today.getDate() - i)
+        dates.push(date.toISOString().split('T')[0]) // Format as YYYY-MM-DD
+      }
+
+      // Count completed tasks per day
+      const completionData = dates.map((date) => {
+        const completedOnDate = tasks.filter((task) => {
+          if (!task.completedAt) return false
+          return task.completedAt.startsWith(date)
+        }).length
+
+        return {
+          date: date,
+          completed: completedOnDate,
+        }
+      })
+
+      return completionData
+    } catch (error) {
+      console.error('API Error - getTasksCompletionByDay:', error)
+      throw error
+    }
+  },
+}
