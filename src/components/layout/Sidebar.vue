@@ -3,7 +3,7 @@
     <!-- App Logo -->
     <div class="d-flex align-center px-4 py-4">
       <v-icon color="primary" size="32" class="mr-2">mdi-check-circle</v-icon>
-      <span class="text-h5 font-weight-medium">TaskFlow</span>
+      <span class="text-h5 font-weight-medium">ZenTasks</span>
     </div>
 
     <v-divider></v-divider>
