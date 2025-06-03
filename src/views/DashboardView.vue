@@ -353,11 +353,11 @@ export default {
   .text-h4 {
     font-size: 1.5rem !important;
   }
-  
+
   .text-h3 {
     font-size: 1.75rem !important;
   }
-  
+
   .text-subtitle-1 {
     font-size: 0.875rem !important;
   }

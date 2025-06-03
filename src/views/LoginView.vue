@@ -12,7 +12,8 @@
           </router-link>
         </div>
 
-        <!-- Login Card -->        <logi-in-form
+        <!-- Login Card -->
+        <logi-in-form
           @login="handleLogin"
           @signup="handleSignup"
           :loading="loading"
@@ -46,7 +47,7 @@ export default {
     mode: {
       type: String,
       default: 'login',
-    }
+    },
   },
   data() {
     return {
@@ -143,11 +144,11 @@ export default {
   .v-col {
     padding: 16px !important;
   }
-  
+
   .mb-8 {
     margin-bottom: 1rem !important;
   }
-  
+
   .mt-6 {
     margin-top: 1rem !important;
   }

@@ -86,30 +86,30 @@ export default {
   .text-h2 {
     font-size: 2rem !important;
   }
-  
+
   .text-h6 {
     font-size: 1rem !important;
   }
-  
+
   .py-16 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
-  
+
   .mb-12 {
     margin-bottom: 1.5rem !important;
   }
-  
+
   .mb-4 {
     margin-bottom: 0.5rem !important;
   }
-  
+
   /* Make expansion panels more compact on mobile */
   :deep(.v-expansion-panel-title) {
     min-height: 48px !important;
     padding: 12px 16px !important;
   }
-  
+
   :deep(.v-expansion-panel-text__wrapper) {
     padding: 0 16px 16px !important;
   }
@@ -120,12 +120,12 @@ export default {
   .text-h2 {
     font-size: 2.5rem !important;
   }
-  
+
   .py-16 {
     padding-top: 3rem !important;
     padding-bottom: 3rem !important;
   }
-  
+
   .mb-12 {
     margin-bottom: 2rem !important;
   }

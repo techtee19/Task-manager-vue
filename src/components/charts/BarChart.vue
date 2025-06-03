@@ -27,10 +27,11 @@ export default {
       type: Object,
       required: true,
     },
-  },  computed: {
+  },
+  computed: {
     chartOptions() {
-      const isMobile = window.innerWidth < 600;
-      
+      const isMobile = window.innerWidth < 600
+
       return {
         responsive: true,
         maintainAspectRatio: false,

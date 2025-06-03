@@ -95,16 +95,16 @@ export default {
     padding-top: 32px;
     padding-bottom: 32px;
   }
-  
+
   .mb-12 {
     margin-bottom: 1.5rem !important;
   }
-  
+
   .py-16 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
-  
+
   .v-btn {
     margin-bottom: 0.5rem !important;
   }

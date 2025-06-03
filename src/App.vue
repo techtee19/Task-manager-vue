@@ -10,17 +10,29 @@
       <v-spacer></v-spacer>
       <v-btn icon @click="showUserMenu = !showUserMenu">
         <v-avatar size="32" color="grey-lighten-1">
-          <v-img :src="user?.avatar || 'https://cdn.vuetifyjs.com/images/john.jpg'" alt="User"></v-img>
+          <v-img
+            :src="user?.avatar || 'https://cdn.vuetifyjs.com/images/john.jpg'"
+            alt="User"
+          ></v-img>
         </v-avatar>
       </v-btn>
       <!-- User Menu -->
-      <v-menu v-model="showUserMenu" :close-on-content-click="false" location="bottom end" offset="10">
+      <v-menu
+        v-model="showUserMenu"
+        :close-on-content-click="false"
+        location="bottom end"
+        offset="10"
+      >
         <v-card min-width="200">
           <v-list>
             <v-list-item prepend-icon="mdi-account" title="Profile"></v-list-item>
             <v-list-item prepend-icon="mdi-cog" title="Settings"></v-list-item>
             <v-divider></v-divider>
-            <v-list-item prepend-icon="mdi-logout" title="Logout" @click="handleLogout"></v-list-item>
+            <v-list-item
+              prepend-icon="mdi-logout"
+              title="Logout"
+              @click="handleLogout"
+            ></v-list-item>
           </v-list>
         </v-card>
       </v-menu>

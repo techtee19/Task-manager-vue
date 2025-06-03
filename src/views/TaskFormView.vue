@@ -228,17 +228,17 @@ export default {
   .text-h4 {
     font-size: 1.5rem !important;
   }
-  
+
   .v-card-actions {
     flex-direction: column;
     gap: 8px;
   }
-  
+
   .v-card-actions .v-btn {
     width: 100%;
     margin-right: 0 !important;
   }
-  
+
   .v-card-actions .v-spacer {
     display: none;
   }

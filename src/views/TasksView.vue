@@ -329,16 +329,16 @@ export default {
   .text-h4 {
     font-size: 1.5rem !important;
   }
-  
+
   .text-subtitle-1 {
     font-size: 0.875rem !important;
   }
-  
+
   /* Adjust button size on small screens */
   .v-btn {
     padding: 0 16px !important;
   }
-  
+
   /* Make the search and filter sections stack better */
   .gap-3 {
     gap: 8px !important;

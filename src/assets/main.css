@@ -3,21 +3,21 @@
   .v-container {
     padding: 12px !important;
   }
-  
+
   .v-row {
     margin: 0 -8px;
   }
-  
+
   .v-col {
     padding: 8px !important;
   }
-  
+
   /* Fix mobile overflow issues */
   .v-card {
     width: 100%;
     overflow-x: hidden;
   }
-  
+
   /* Ensure buttons are properly sized on mobile */
   .v-btn {
     min-width: auto;

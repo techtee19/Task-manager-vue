@@ -97,29 +97,29 @@ export default {
   .text-h5 {
     font-size: 1.25rem !important;
   }
-  
+
   .text-h6 {
     font-size: 1rem !important;
     margin-bottom: 0.5rem !important;
   }
-  
+
   .mb-4 {
     margin-bottom: 0.5rem !important;
   }
-  
+
   .mb-6 {
     margin-bottom: 1rem !important;
   }
-  
+
   .mb-2 {
     margin-bottom: 0.25rem !important;
   }
-  
+
   .my-6 {
     margin-top: 1rem !important;
     margin-bottom: 1rem !important;
   }
-  
+
   .v-col {
     padding-top: 0.5rem !important;
     padding-bottom: 0.5rem !important;

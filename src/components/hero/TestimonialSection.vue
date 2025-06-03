@@ -115,7 +115,9 @@ export default {
 
 .testimonial-card {
   border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .testimonial-card:hover {
@@ -128,32 +130,32 @@ export default {
   .text-h2 {
     font-size: 2rem !important;
   }
-  
+
   .text-h6 {
     font-size: 1rem !important;
   }
-  
+
   .py-16 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
-  
+
   .mb-12 {
     margin-bottom: 1.5rem !important;
   }
-  
+
   .pa-6 {
     padding: 1rem !important;
   }
-  
+
   .mb-6 {
     margin-bottom: 1rem !important;
   }
-  
+
   .mb-4 {
     margin-bottom: 0.5rem !important;
   }
-  
+
   .testimonial-card {
     margin-bottom: 1rem;
   }
@@ -164,16 +166,16 @@ export default {
   .text-h2 {
     font-size: 2.5rem !important;
   }
-  
+
   .py-16 {
     padding-top: 3rem !important;
     padding-bottom: 3rem !important;
   }
-  
+
   .mb-12 {
     margin-bottom: 2rem !important;
   }
-  
+
   .testimonial-card {
     margin-bottom: 1.5rem;
   }

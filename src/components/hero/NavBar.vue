@@ -17,19 +17,22 @@
         </div>
 
         <!-- Mobile Menu Button -->
-        <v-app-bar-nav-icon 
-          class="d-flex d-sm-none" 
+        <v-app-bar-nav-icon
+          class="d-flex d-sm-none"
           @click="mobileMenuOpen = !mobileMenuOpen"
         ></v-app-bar-nav-icon>
 
-        <v-spacer></v-spacer>        <!-- Login/Signup Buttons (Desktop) -->
+        <v-spacer></v-spacer>
+        <!-- Login/Signup Buttons (Desktop) -->
         <div class="d-none d-sm-flex">
           <v-btn variant="text" class="text-none mr-2" to="/login">Sign In</v-btn>
-          <v-btn color="black" variant="outlined" class="text-none" to="/register">Get Started</v-btn>
+          <v-btn color="black" variant="outlined" class="text-none" to="/register"
+            >Get Started</v-btn
+          >
         </div>
       </v-container>
     </v-app-bar>
-      <!-- Mobile Menu -->
+    <!-- Mobile Menu -->
     <v-navigation-drawer
       v-model="mobileMenuOpen"
       temporary
@@ -70,7 +73,7 @@ export default {
   },
   data() {
     return {
-      mobileMenuOpen: false
+      mobileMenuOpen: false,
     }
   },
   methods: {},
@@ -87,7 +90,7 @@ export default {
   .v-app-bar {
     height: 56px !important;
   }
-  
+
   .text-h5 {
     font-size: 1.25rem !important;
   }

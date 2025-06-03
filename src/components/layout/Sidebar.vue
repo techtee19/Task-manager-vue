@@ -3,8 +3,8 @@
     v-model="drawer"
     :permanent="$vuetify.display.lgAndUp"
     :temporary="!$vuetify.display.lgAndUp"
-    color="white" 
-    border 
+    color="white"
+    border
     width="260"
   >
     <!-- App Logo -->

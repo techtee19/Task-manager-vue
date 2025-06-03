@@ -165,40 +165,40 @@ export default {
   .text-h2 {
     font-size: 2rem !important;
   }
-  
+
   .text-h6 {
     font-size: 1rem !important;
   }
-  
+
   .text-h5 {
     font-size: 1.25rem !important;
   }
-  
+
   .text-h3 {
     font-size: 1.75rem !important;
   }
-  
+
   .py-16 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
-  
+
   .mb-12 {
     margin-bottom: 1.5rem !important;
   }
-  
+
   .mb-6 {
     margin-bottom: 1rem !important;
   }
-  
+
   .mb-4 {
     margin-bottom: 0.5rem !important;
   }
-  
+
   .pricing-card {
     margin-bottom: 1.5rem;
   }
-  
+
   .popular-badge {
     right: 1rem;
     padding: 0.15rem 0.75rem;
@@ -211,12 +211,12 @@ export default {
   .text-h2 {
     font-size: 2.5rem !important;
   }
-  
+
   .py-16 {
     padding-top: 3rem !important;
     padding-bottom: 3rem !important;
   }
-  
+
   .pricing-card {
     margin-bottom: 1.5rem;
   }
