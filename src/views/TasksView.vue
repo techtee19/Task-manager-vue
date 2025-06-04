@@ -137,7 +137,7 @@
                     </template>
                     <v-list-item-title>Edit</v-list-item-title>
                   </v-list-item>
-                  <v-list-item @click="deleteTask(task.id)">
+                  <v-list-item @click="openDeleteDialog(task)">
                     <template v-slot:prepend>
                       <v-icon size="small">mdi-delete</v-icon>
                     </template>
@@ -166,6 +166,23 @@
       </p>
       <v-btn color="primary" to="/tasks/new" class="mt-2">Create Task</v-btn>
     </v-card>
+
+    <!-- Dialog for deletion confirmation -->
+    <v-dialog v-model="deleteDialog" max-width="400">
+      <v-card>
+        <v-card-title class="text-h5">Delete Task</v-card-title>
+        <v-card-text>
+          Are you sure you want to delete this task? This action cannot be undone.
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="grey-darken-1" variant="text" @click="deleteDialog = false">Cancel</v-btn>
+          <v-btn color="error" variant="text" @click="confirmDelete" :loading="deleteLoading">
+            Delete
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -183,6 +200,9 @@ export default {
       selectedStatus: 'All Tasks',
       statusOptions: ['All Tasks', 'Completed', 'Pending', 'Overdue'],
       categoryOptions: ['All Categories', 'Work', 'Personal', 'Learning', 'Health'],
+      deleteDialog: false,
+      taskToDelete: null,
+      deleteLoading: false,
     }
   },
   computed: {
@@ -294,11 +314,33 @@ export default {
       this.$router.push({ name: 'edit-task', params: { id: task.id } })
     },
 
-    async deleteTask(taskId) {
-      // Add confirmation dialog
-      const confirm = window.confirm('Are you sure you want to delete this task?')
-      if (confirm) {
-        await this.deleteTask(taskId)
+    openDeleteDialog(task) {
+      this.taskToDelete = task
+      this.deleteDialog = true
+    },
+
+    async confirmDelete() {
+      if (!this.taskToDelete) return
+
+      this.deleteLoading = true
+      try {
+        await this.deleteTask(this.taskToDelete.id)
+        // Show success message
+        this.$root.$emit('show-snackbar', {
+          text: `Task "${this.taskToDelete.title}" deleted successfully`,
+          color: 'success',
+        })
+      } catch (error) {
+        console.error('Error deleting task:', error)
+        // Show error message
+        this.$root.$emit('show-snackbar', {
+          text: 'Failed to delete task',
+          color: 'error',
+        })
+      } finally {
+        this.deleteLoading = false
+        this.deleteDialog = false
+        this.taskToDelete = null
       }
     },
   },
